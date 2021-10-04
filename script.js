@@ -54,14 +54,51 @@ let operator = '';
 
 numbers.forEach(number => {
   number.addEventListener('click', () => {
-    calculation += number.textContent;
-    display.textContent = calculation;
+    if(!(calculation)) {
+      if(number.textContent != '0') {
+        calculation += number.textContent;
+        display.textContent = calculation;
+      }
+    } else {
+      calculation += number.textContent;
+      display.textContent = calculation;
+    }
   })
-})
+});
+
 ops.forEach(op => {
   op.addEventListener('click', () => {
-    operator = op.textContent;
-    calculation += op.textContent;
-    display.textContent = calculation;
+    if(!(op.classList.contains('unavailable')) && calculation){
+      operator = op.textContent;
+      calculation += op.textContent;
+      display.textContent = calculation;
+      //makes unavailable to enter again
+      ops.forEach(elem =>{
+        elem.classList.add('unavailable');
+      })
+    }
+  })
+});
+
+equal.addEventListener('click', () => {
+  let numbers = calculation.split(/\D/g);
+  console.log(numbers)
+  console.log(typeof(+'e')=='number')
+  console.log(!(isNaN(Number(numbers[1]))))
+  if(numbers.length == 2 && typeof(+numbers[1])=='number' && !(isNaN(Number(numbers[1])))) {
+    display.textContent = operate(numbers[0],operator,numbers[1])
+    calculation = '';
+    operator = '';
+    ops.forEach(elem =>{
+      elem.classList.remove('unavailable');
+    })
+}})
+
+clear.addEventListener('click', () => {
+  calculation = '';
+  operator = '';
+  display.textContent = '0';
+  ops.forEach(elem =>{
+    elem.classList.remove('unavailable');
   })
 })
