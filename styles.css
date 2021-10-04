@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.calculator {
+  width: 400px;
+  height: 600px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+}
+
+.calculator div {
+  background-color: blueviolet;
+}
+
+.display {
+  grid-area: 1/ 1/ 3/ 5;
+}
+.equal {
+  grid-area: 5/4/7/4;
+}
+.clear {
+  grid-row: 4;
+  grid-column: 4;
+}
+.zero {
+  grid-area: 7/1/7/5;
+}
