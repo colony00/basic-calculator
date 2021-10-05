@@ -17,7 +17,12 @@ const operators = {
 }
 
 const operate = (a,operator,b) => {
-  return operators[signDict[operator]](a,b)
+  result = operators[signDict[operator]](a,b)
+  if (result == Infinity) {
+    alert('You are dividing by zero, so you get a one instead');
+    return 1;
+  }
+  return result;
 }
 
 const signDict = {
