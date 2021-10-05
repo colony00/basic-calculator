@@ -51,9 +51,11 @@ const ops = [add,sub,multi,div];
 
 let calculation = '';
 let operator = '';
+let result = false;
 
 numbers.forEach(number => {
   number.addEventListener('click', () => {
+    if(result) calculation = ''
     if(!(calculation)) {
       if(number.textContent != '0') {
         calculation += number.textContent;
@@ -71,6 +73,7 @@ ops.forEach(op => {
     if(!(op.classList.contains('unavailable')) && calculation){
       operator = op.textContent;
       calculation += op.textContent;
+      result = false;
       display.textContent = calculation;
       //makes unavailable to enter again
       ops.forEach(elem =>{
@@ -87,8 +90,9 @@ equal.addEventListener('click', () => {
   console.log(!(isNaN(Number(numbers[1]))))
   if(numbers.length == 2 && typeof(+numbers[1])=='number' && !(isNaN(Number(numbers[1])))) {
     display.textContent = operate(numbers[0],operator,numbers[1])
-    calculation = '';
+    calculation = display.textContent;
     operator = '';
+    result = true;
     ops.forEach(elem =>{
       elem.classList.remove('unavailable');
     })
@@ -97,6 +101,7 @@ equal.addEventListener('click', () => {
 clear.addEventListener('click', () => {
   calculation = '';
   operator = '';
+  result = false;
   display.textContent = '0';
   ops.forEach(elem =>{
     elem.classList.remove('unavailable');
