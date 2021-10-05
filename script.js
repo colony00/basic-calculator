@@ -85,9 +85,6 @@ ops.forEach(op => {
 
 equal.addEventListener('click', () => {
   let numbers = calculation.split(/\D/g);
-  console.log(numbers)
-  console.log(typeof(+'e')=='number')
-  console.log(!(isNaN(Number(numbers[1]))))
   if(numbers.length == 2 && typeof(+numbers[1])=='number' && !(isNaN(Number(numbers[1])))) {
     display.textContent = operate(numbers[0],operator,numbers[1])
     calculation = display.textContent;
@@ -98,12 +95,18 @@ equal.addEventListener('click', () => {
     })
 }})
 
+let clearing = false;
 clear.addEventListener('click', () => {
-  calculation = '';
-  operator = '';
-  result = false;
-  display.textContent = '0';
-  ops.forEach(elem =>{
-    elem.classList.remove('unavailable');
-  })
+  if (clearing) {
+    calculation = '';
+    operator = '';
+    result = false;
+    display.textContent = '0';
+    ops.forEach(elem =>{
+      elem.classList.remove('unavailable');
+    })
+    clearing = false;
+  } else {
+    clearing = true;
+  }
 })
